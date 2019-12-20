@@ -5,6 +5,7 @@ import random
 class SudokuArray:
     def __init__(self):
         self.board = np.zeros((9,9), dtype=int)
+
         self.new_sudoku()
         self.play_board()
 
@@ -12,9 +13,9 @@ class SudokuArray:
         # horizontal check
         result = []
         for row in self.board:
-            if len(list(x for x in row if x != 0)) == len(set(list(x for x in row if x != 0))):
+            if len(list(x for x in row if x != 0)) == len(set(list(x for x in row if x != 0))) and len(list(x for x in row if x != 0)) == 9:
                 result.append(True)
-        if all(result):
+        if all(result) and len(result) == 9:
             return True
         return False
 
@@ -27,7 +28,7 @@ class SudokuArray:
                 column.append(row[col])
             if len(list(x for x in column if x != 0)) == len(set(list(x for x in column if x != 0))):
                 result.append(True)
-        if all(result):
+        if all(result) and len(result) == 9:
             return True
         return False
 
@@ -39,9 +40,9 @@ class SudokuArray:
                 for nr in self.board[d:d+3]:
                     for col in nr[r:r+3]:
                         box.append(col)
-                if len(list(x for x in box if x != 0)) == len(set(list(x for x in box if x != 0))):
+                if len(list(x for x in box if x != 0)) == len(set(list(x for x in box if x != 0))) and len(list(x for x in box if x != 0)) == 9:
                     result.append(True)
-        if all(result):
+        if all(result) and len(result) == 9:
             return True
         return False
 
@@ -73,6 +74,7 @@ class SudokuArray:
         # np.random.shuffle(self.board)
         self.board = np.rot90(self.board)
 
+
     def play_board(self):
 
         indexes = [0,1,2,3,4,5,6,7,8]
@@ -81,6 +83,7 @@ class SudokuArray:
             random.shuffle(idx)
             for x in idx[:4]:
                 self.board[i][x] = 0
+        self.original_board = np.copy(self.board)
         return self.board
 
     def show(self):
