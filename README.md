@@ -1,2 +1,5 @@
 # Sudoku
-Sudoku game in Python
+
+Sudoku game in Python by using Pygame.
+
+*..under progresss*
